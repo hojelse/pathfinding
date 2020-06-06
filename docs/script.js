@@ -1,2 +1,2 @@
 "use strict";
-console.log('Hello world from script.ts');
+console.log(new Graph(2));

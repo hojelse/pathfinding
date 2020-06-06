@@ -1,1 +1,2 @@
-console.log('Hello world from script.ts');
+let g = new Graph(2);
+console.log(g);
