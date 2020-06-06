@@ -1,15 +1,20 @@
 "use strict";
-var LinkedList = /** @class */ (function () {
-    function LinkedList() {
+class LinkedList {
+    constructor() {
         this.head = null;
     }
-    LinkedList.prototype.add = function (n) {
+    add(n) {
         if (this.head == null) {
             this.head = new LinkedListNode(n);
         }
         else {
             this.head = new LinkedListNode(n, this.head);
         }
-    };
-    return LinkedList;
-}());
+    }
+}
+class LinkedListNode {
+    constructor(data, next = null) {
+        this.data = data,
+            this.next = next;
+    }
+}
