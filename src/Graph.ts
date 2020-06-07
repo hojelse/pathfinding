@@ -12,6 +12,10 @@ class Graph {
     this.adjacencyList[from].add(to);
   }
 
+  getNeigborhoodOf(v:number) {
+    return this.adjacencyList[v];
+  }
+
   [Symbol.iterator]() : GraphIterator {
     return new GraphIterator(this);
   }
@@ -28,7 +32,7 @@ class GraphIterator implements Iterator<number> {
   next() : IteratorResult<number> {
     let adjacencyList = this.graph.adjacencyList;
     return {
-      done : this.i === adjacencyList.length -1,
+      done : this.i === adjacencyList.length,
       value : this.i++,
     }
   }

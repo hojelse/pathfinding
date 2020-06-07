@@ -10,6 +10,9 @@ class Graph {
     addEdge(from, to) {
         this.adjacencyList[from].add(to);
     }
+    getNeigborhoodOf(v) {
+        return this.adjacencyList[v];
+    }
     [Symbol.iterator]() {
         return new GraphIterator(this);
     }
@@ -22,7 +25,7 @@ class GraphIterator {
     next() {
         let adjacencyList = this.graph.adjacencyList;
         return {
-            done: this.i === adjacencyList.length - 1,
+            done: this.i === adjacencyList.length,
             value: this.i++,
         };
     }
