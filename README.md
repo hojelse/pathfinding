@@ -18,7 +18,7 @@ install node.js to use npm
 
 Install [Visual Studio Code](https://code.visualstudio.com/) and extension [Live Sass Compiler](https://github.com/ritwickdey/vscode-live-sass-compiler) by Ritwick Dey
 
-Add following to vscode user setting ``settings.json`` to compile ``.sass`` files to ``./docs/styles``
+Add following to vscode user setting ``settings.json`` to compile ``.sass`` files to ``./docs/styles/``
 ```
 "liveSassCompile.settings.formats": [{
   "format": "expanded",
