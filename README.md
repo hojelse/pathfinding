@@ -1,6 +1,6 @@
 # Pathfinding visualization
 
-! in progress
+> in progress
 
 A visualization website for pathfinding algorithms
 
