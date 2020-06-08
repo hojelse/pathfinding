@@ -1,43 +1,43 @@
-class LinkedList{
-  head: LinkedListNode | null;
+class LinkedList<T> {
+  head: LinkedListNode<T> | null;
 
   constructor(){
       this.head = null;
   }
 
-  add (n: number) {
+  add (n: T) {
     if(this.head == null) {
-      this.head = new LinkedListNode(n);
+      this.head = new LinkedListNode<T>(n);
     } else {
-      this.head = new LinkedListNode(n, this.head);
+      this.head = new LinkedListNode<T>(n, this.head);
     }
   }
 
-  [Symbol.iterator]() : LinkedListIterator {
-    return new LinkedListIterator(this);
+  [Symbol.iterator]() : LinkedListIterator<T> {
+    return new LinkedListIterator<T>(this);
   }
 }
 
-class LinkedListNode {
-  data: number;
-  next: LinkedListNode|null;
-  constructor(data: number, next:LinkedListNode|null = null){
+class LinkedListNode<T> {
+  data: T;
+  next: LinkedListNode<T>|null;
+  constructor(data: T, next:LinkedListNode<T>|null = null){
       this.data = data,
       this.next = next
   }
 }
 
-class LinkedListIterator implements Iterator<number> {
-  nextNode:LinkedListNode;
-  linkedList:LinkedList;
+class LinkedListIterator<T> implements Iterator<T> {
+  nextNode:LinkedListNode<T>;
+  linkedList:LinkedList<T>;
 
-  constructor(linkedList:LinkedList) {
+  constructor(linkedList:LinkedList<T>) {
     this.linkedList = linkedList;
     this.nextNode = linkedList.head;
   }
 
-  next() : IteratorResult<number> { //TODO refactor
-    let currentNode:LinkedListNode = this.nextNode;
+  next() : IteratorResult<T> { //TODO refactor
+    let currentNode:LinkedListNode<T> = this.nextNode;
     if (currentNode == null) return {
       done : true,
       value : 0

@@ -7,11 +7,12 @@ class Graph {
         for (let i = 0; i < V; i++)
             this.adjacencyList[i] = new LinkedList();
     }
-    addEdge(from, to) {
-        this.adjacencyList[from].add(to);
+    addEdge(from, to, weight = 1) {
+        let edge = new Edge(from, to, weight);
+        this.adjacencyList[from].add(edge);
     }
-    getNeigborhoodOf(v) {
-        return this.adjacencyList[v];
+    getNeigborhoodOf(vertex) {
+        return this.adjacencyList[vertex];
     }
     [Symbol.iterator]() {
         return new GraphIterator(this);
