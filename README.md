@@ -2,6 +2,14 @@
 
 # Pathfinding
 
+### Pathfinding
+
+Based on [Shortest Paths](https://algs4.cs.princeton.edu/44sp/) from Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne.
+
+Dijkstra [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+
+A* [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
+
 ### Development (Typescript and Sass in vscode)
 
 #### Typescript
@@ -26,11 +34,3 @@ Add following to vscode user setting ``settings.json`` to compile ``.sass`` file
   "savePath": "./docs/styles"
 }]
 ```
-
-### Pathfinding
-
-Based on [Shortest Paths](https://algs4.cs.princeton.edu/44sp/) from Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne.
-
-Dijkstra [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
-
-A* [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
