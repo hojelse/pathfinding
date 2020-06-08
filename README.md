@@ -12,7 +12,9 @@ Dijkstra [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 
 A* [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
 
-## Development (Typescript and Sass in vscode)
+## Development
+
+Typescript and Sass in vscode
 
 ### Typescript
 
