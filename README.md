@@ -1,8 +1,8 @@
-> A project in progress
-
 # Pathfinding visualization
 
-### Pathfinding
+> A project in progress
+
+## Pathfinding
 
 Based on [Shortest Paths](https://algs4.cs.princeton.edu/44sp/) from Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne.
 
@@ -10,9 +10,9 @@ Dijkstra [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 
 A* [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
 
-### Development (Typescript and Sass in vscode)
+## Development (Typescript and Sass in vscode)
 
-#### Typescript
+### Typescript
 
 install [node.js](https://nodejs.org/en/download/) to use `npm`
 
@@ -22,7 +22,7 @@ install [node.js](https://nodejs.org/en/download/) to use `npm`
 
 `tsc --watch` to recompile on file changed
 
-#### Sass
+### Sass
 
 Install [Visual Studio Code](https://code.visualstudio.com/) and extension [Live Sass Compiler](https://github.com/ritwickdey/vscode-live-sass-compiler) by Ritwick Dey
 
