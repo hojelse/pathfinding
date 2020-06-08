@@ -14,11 +14,11 @@ A* [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
 
 #### Typescript
 
-install node.js to use npm
+install [node.js](https://nodejs.org/en/download/) to use ``npm``
 
 ``npm install -g typescript`` to install typescript compiler globally
 
-``tsc`` to compile .ts files in *src* to .js in *docs*
+``tsc`` to compile ``.ts`` files in ``/src/`` to ``.js`` in ``/docs/``
 
 ``tsc --watch`` to recompile on file changed
 
