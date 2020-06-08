@@ -1,4 +1,4 @@
-[A project in progress]
+> A project in progress
 
 # Pathfinding visualization
 
