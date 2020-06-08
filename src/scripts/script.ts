@@ -9,7 +9,5 @@ graph.addEdge(3,6);
 graph.addEdge(2,7);
 
 let d = new Dijkstra(graph, 0);
-
 console.log(d.pathTo(6));
 console.log(d.distTo(6));
-
