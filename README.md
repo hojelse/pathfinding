@@ -1,20 +1,33 @@
 [A project in progress]
 
-# Typescript repository
+# Pathfinding
 
-### Dependancies
+### Development (Typescript and Sass in vscode)
+
+#### Typescript
 
 install node.js to use npm
 
 ``npm install -g typescript`` to install typescript compiler globally
 
-### Use
-
 ``tsc`` to compile .ts files in *src* to .js in *docs*
 
 ``tsc --watch`` to recompile on file changed
 
-# Pathfinding
+#### Sass
+
+Install vscode extension [Live Sass Compiler](https://github.com/ritwickdey/vscode-live-sass-compiler) by Ritwick Dey
+
+Add following to user setting settings.json in vscode
+```
+"liveSassCompile.settings.formats": [{
+  "format": "expanded",
+  "extensionName": ".css",
+  "savePath": "./docs/styles"
+}]
+```
+
+### Pathfinding
 
 Based on [Shortest Paths](https://algs4.cs.princeton.edu/44sp/) from Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne.
 
