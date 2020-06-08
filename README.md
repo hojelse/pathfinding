@@ -14,19 +14,19 @@ A* [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
 
 #### Typescript
 
-install [node.js](https://nodejs.org/en/download/) to use ``npm``
+install [node.js](https://nodejs.org/en/download/) to use `npm`
 
-``npm install -g typescript`` to install typescript compiler globally
+`npm install -g typescript` to install typescript compiler globally
 
-``tsc`` to compile ``.ts`` files in ``./src/`` to ``.js`` files in ``./docs/``
+`tsc` to compile `.ts` files in `./src/` to `.js` files in `./docs/`
 
-``tsc --watch`` to recompile on file changed
+`tsc --watch` to recompile on file changed
 
 #### Sass
 
 Install [Visual Studio Code](https://code.visualstudio.com/) and extension [Live Sass Compiler](https://github.com/ritwickdey/vscode-live-sass-compiler) by Ritwick Dey
 
-Add following to vscode user setting ``settings.json`` to compile ``.sass`` files to ``./docs/styles/``
+Add following to vscode user setting `settings.json` to compile `.sass` files to `./docs/styles/`
 ```
 "liveSassCompile.settings.formats": [{
   "format": "expanded",
