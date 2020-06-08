@@ -18,7 +18,7 @@ install [node.js](https://nodejs.org/en/download/) to use ``npm``
 
 ``npm install -g typescript`` to install typescript compiler globally
 
-``tsc`` to compile ``.ts`` files in ``/src/`` to ``.js`` files in ``/docs/``
+``tsc`` to compile ``.ts`` files in ``./src/`` to ``.js`` files in ``./docs/``
 
 ``tsc --watch`` to recompile on file changed
 
