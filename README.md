@@ -1,6 +1,6 @@
 [A project in progress]
 
-# Pathfinding
+# Pathfinding visualization
 
 ### Pathfinding
 
