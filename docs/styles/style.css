@@ -15,6 +15,26 @@ body {
   grid-template-rows: 1fr 100px;
 }
 
+.inputWrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.inputWrapper > form {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  height: 50px;
+  background: none;
+  border: 1px solid #fff;
+  text-align: center;
+  color: #fff;
+}
+
 input[type=text] {
   height: 50px;
   width: 50px;
@@ -24,6 +44,14 @@ input[type=text] {
   text-align: center;
   color: #fff;
   font-size: 2em;
+}
+
+input.origin[type=text] {
+  background-color: lightblue;
+}
+
+input.goal[type=text] {
+  background-color: violet;
 }
 
 input[type=text]:focus {
@@ -44,40 +72,16 @@ svg {
   align-items: center;
 }
 
-.table, th, .td {
+.table, th, .node {
   border: 2px solid #333;
 }
 
 .table {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   box-shadow: 0 5px 10px -4px #00000044;
 }
 
-.td[data-cell-type=origin]::after {
-  content: '';
-  display: block;
-  height: 50%;
-  width: 50%;
-  border-radius: 50%;
-  background-color: lightblue;
-}
-
-.td[data-cell-type=wall] {
-  background-color: #333;
-}
-
-.td[data-cell-type=goal]::after {
-  content: '';
-  display: block;
-  height: 50%;
-  width: 50%;
-  border-radius: 50%;
-  background-color: violet;
-}
-
-.td {
+.node {
   position: relative;
   display: flex;
   justify-content: center;
@@ -85,5 +89,34 @@ svg {
   background-color: #444;
   height: 100px;
   width: 100px;
+  color: #fff;
+}
+
+.node.wall {
+  background-color: #333;
+}
+
+.node.path {
+  background-color: blueviolet;
+}
+
+.node.origin::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 50%;
+  width: 50%;
+  border-radius: 50%;
+  background-color: lightblue;
+}
+
+.node.goal::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 50%;
+  width: 50%;
+  border-radius: 50%;
+  background-color: violet;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,9 @@
-$background: #333;
-$highlight: #fff;
+$background: #333
+$highlight: #fff
+
+$origin: lightblue
+$goal: violet
+$path: blueviolet
 
 html, 
 body
@@ -16,6 +20,23 @@ body
   grid-template-columns: 1fr
   grid-template-rows: 1fr 100px
 
+.inputWrapper
+  height: 100%
+  display: flex
+  align-items: center
+
+.inputWrapper > form
+  height: 100%
+  display: flex
+  align-items: center
+
+input
+  height: 50px
+  background: none
+  border: 1px solid $highlight
+  text-align: center
+  color: $highlight
+
 input[type=text]
   height: 50px
   width: 50px
@@ -25,6 +46,12 @@ input[type=text]
   text-align: center
   color: $highlight
   font-size: 2em
+
+input.origin[type=text]
+  background-color: $origin
+
+input.goal[type=text]
+  background-color: $goal
 
 input[type=text]:focus
   border-color: $highlight
@@ -41,35 +68,14 @@ svg
   justify-content: center
   align-items: center
 
-.table, th, .td
+.table, th, .node
   border: 2px solid $background
 
 .table
   display: grid
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr
   box-shadow: 0 5px 10px -4px #00000044
 
-.td[data-cell-type=origin]::after
-  content: ''
-  display: block
-  height: 50%
-  width: 50%
-  border-radius: 50%
-  background-color: lightblue
-
-.td[data-cell-type=wall]
-  background-color: $background
-
-.td[data-cell-type=goal]::after
-  content: ''
-  display: block
-  height: 50%
-  width: 50%
-  border-radius: 50%
-  background-color: violet
-
-.td
+.node
   position: relative
   display: flex
   justify-content: center
@@ -77,4 +83,28 @@ svg
   background-color: #444
   height: 100px
   width: 100px
+  color: $highlight
 
+.node.wall
+  background-color: $background
+
+.node.path
+  background-color: $path
+
+.node.origin::after
+  content: ''
+  position: absolute
+  display: block
+  height: 50%
+  width: 50%
+  border-radius: 50%
+  background-color: $origin
+
+.node.goal::after
+  content: ''
+  position: absolute
+  display: block
+  height: 50%
+  width: 50%
+  border-radius: 50%
+  background-color: $goal
