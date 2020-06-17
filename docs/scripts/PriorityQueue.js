@@ -52,7 +52,7 @@ class MinPQ {
         this.pq[this.n + 1] = -1;
         return min;
     }
-    keyOf(i, key) {
+    keyOf(i) {
         this.validateIndex(i);
         if (!this.contains(i))
             throw new Error("NoSuchElementException: index is not in the priority queue");

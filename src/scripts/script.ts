@@ -11,3 +11,11 @@ graph.addEdge(2,7);
 let d = new Dijkstra(graph, 0);
 console.log(d.pathTo(6));
 console.log(d.distTo(6));
+
+let n = 5;
+let m = 5;
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < m; j++) {
+    console.log(n,m);
+  }
+}
