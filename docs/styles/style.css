@@ -15,7 +15,7 @@ body {
   grid-template-rows: 1fr 1fr;
 }
 
-input[type=text] {
+.edges > input[type=text] {
   height: 50px;
   width: 50px;
   background: none;
@@ -35,9 +35,17 @@ input[type=text]:focus {
   justify-self: center;
   align-self: center;
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
   grid-template-rows: auto;
+  grid-row-gap: 20px;
   border: solid;
+}
+
+.edges > svg {
+  fill: #fff;
+  height: 50px;
+  width: 50px;
+  transform: scale(0.6);
 }
 
 .output-log {
