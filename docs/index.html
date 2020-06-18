@@ -25,17 +25,19 @@
   <script defer src='scripts/Dijkstra.js'></script>
   <script defer src='scripts/ui.js'></script>
   <script defer src='scripts/script.js'></script>
+  <script defer src='scripts/myscript.js'></script>
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700" rel="stylesheet">
 </head>
 <body>
   <div class="tableWrapper">
+    <div class="table"></div>
   </div>
   <div class="inputWrapper">
     <form>
-      <input class="origin" type="text" value="A" maxlength="1">
+      <input id="origin" class="origin" type="text" value="0" maxlength="2" autocomplete="off">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 96 70"><polygon points="73.77 34.02 85.23 45.48 0.68 45.48 0.68 50.52 85.23 50.52 73.77 61.98 77.34 65.55 94.88 48 77.34 30.45 73.77 34.02"/></svg>
-      <input class="goal" type="text" value="B" maxlength="1">
+      <input id="goal" class="goal" type="text" value="24" maxlength="2" autocomplete="off">
       <input id="findRoute" type="submit" value="Find route">
     </form>
   </div>

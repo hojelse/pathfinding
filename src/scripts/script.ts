@@ -1,37 +1,60 @@
-let letters:string[] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+const nodeClasses = ["origin","goal","wall","path"];
 
 let graph = new Graph(25);
 setupGridDemo();
 
-let originNodeLetter = "A";
-let goalNodeLetter = "Y";
+let originNode = 0;
+let goalNode = 24;
 
-let originNode = letters.indexOf(originNodeLetter);
-let goalNode = letters.indexOf(goalNodeLetter);
+drawNewPath(originNode, goalNode);
 
-let d = new Dijkstra(graph, originNode);
+function drawNewPath(originNode:number, goalNode:number) {
+  let d = new Dijkstra(graph, originNode);
 
-let path = d.pathTo(goalNode);
-let pathLetters = createPathOfLetters(path);
-console.log(pathLetters);
-console.log("dist: " + d.distTo(goalNode));
+  let pathStack = d.pathTo(goalNode);
+  let path = formatPath(pathStack);
+  let dist = d.distTo(goalNode);
 
-document.querySelector("[data-id='"+originNode+"']").classList.add("origin");
-document.querySelector("[data-id='"+goalNode+"']").classList.add("goal");
-
-for (let i = 0; i < pathLetters.length; i++) {
-  let node = document.querySelector("[data-id='" + letters.indexOf(pathLetters[i]) +"']");
-  node.classList.add("path")
+  clearTable();
+  drawOriginNode(originNode);
+  drawGoalNode(goalNode);
+  drawPath(path);
 }
 
-function createPathOfLetters(path:Edge[]) {
-  let pathLetters = [letters[path[path.length - 1].from]];
+function clearTable() {
+  let nodes:NodeListOf<HTMLDivElement> = document.querySelectorAll('div.node');
+  for (let i = 0; i < nodes.length; i++) {
+    const node:HTMLDivElement = nodes[i];
+    for (let j = 0; j < nodeClasses.length; j++) {
+      const nodeClass:string = nodeClasses[j];
+      node.classList.remove(nodeClass);
+    }
+  }
+  
+}
+function drawOriginNode(originNode:number) {
+  document.querySelector("[data-id='" + originNode + "']").classList.add("origin");
+}
+
+function drawGoalNode(goalNode:number) {
+  document.querySelector("[data-id='" + goalNode + "']").classList.add("goal");
+}
+
+function drawPath(path:number[]) {
+  for (let i = 0; i < path.length; i++) {
+    let node = document.querySelector("[data-id='" + path[i] + "']");
+    node.classList.add("path");
+  }
+}
+
+function formatPath(pathStack:Edge[]) {
+  let path = [pathStack[pathStack.length - 1].from];
   let ii = 1;
-  for (let i = path.length - 1; i >= 0; i--) {
-    pathLetters[ii] = letters[path[i].to];
+  for (let i = pathStack.length - 1; i >= 0; i--) {
+    path[ii] = pathStack[i].to;
     ii++;
   }
-  return pathLetters;
+  return path;
 }
 
 function setupGridDemo() {
@@ -40,7 +63,7 @@ function setupGridDemo() {
   let rows = 5;
   let cols = 5;
 
-  let table = document.createElement("TABLE");
+  let table:HTMLTableElement = document.querySelector('.table');
   table.classList.add("table");
   table.style.gridTemplateRows = "repeat("+rows+",1fr)";
   table.style.gridTemplateColumns = "repeat("+cols+",1fr)";
@@ -76,7 +99,7 @@ function setupGridDemo() {
   function newNode(x:number,y:number) {
     let div = document.createElement("DIV");
     div.classList.add("node");
-    div.innerText = letters[coordToNodeID(x,y)];
+    div.innerText = coordToNodeID(x,y).toString();
     div.dataset.id = coordToNodeID(x,y).toString();
     div.dataset.x = x.toString();
     div.dataset.y = y.toString();
@@ -94,22 +117,4 @@ function setupGridDemo() {
 
 function coordToNodeIDGeneral(x:number, y:number, cols:number):number {
   return x + y*cols;
-}
-
-window.onresize = resizePage;
-let aHeight = 1;
-let aWidth = 1;
-let tableWrapper:HTMLElement = document.querySelector('.tableWrapper');
-let table:HTMLElement = document.querySelector('.table');
-function resizePage() {
-  const pageConainerIsWide = tableWrapper.offsetHeight / tableWrapper.offsetWidth < aHeight;
-  if (pageConainerIsWide) {
-      tableWrapper.style.flexDirection = "column";
-      table.style.width = tableWrapper.offsetHeight * aWidth + "px";
-      table.style.height = "auto";
-  } else {
-      tableWrapper.style.flexDirection = "row";
-      table.style.height = tableWrapper.offsetWidth * aHeight + "px";
-      table.style.width = "auto";
-  }
 }

@@ -1,36 +1,56 @@
 "use strict";
-let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const nodeClasses = ["origin", "goal", "wall", "path"];
 let graph = new Graph(25);
 setupGridDemo();
-let originNodeLetter = "A";
-let goalNodeLetter = "Y";
-let originNode = letters.indexOf(originNodeLetter);
-let goalNode = letters.indexOf(goalNodeLetter);
-let d = new Dijkstra(graph, originNode);
-let path = d.pathTo(goalNode);
-let pathLetters = createPathOfLetters(path);
-console.log(pathLetters);
-console.log("dist: " + d.distTo(goalNode));
-document.querySelector("[data-id='" + originNode + "']").classList.add("origin");
-document.querySelector("[data-id='" + goalNode + "']").classList.add("goal");
-for (let i = 0; i < pathLetters.length; i++) {
-    let node = document.querySelector("[data-id='" + letters.indexOf(pathLetters[i]) + "']");
-    node.classList.add("path");
+let originNode = 0;
+let goalNode = 24;
+drawNewPath(originNode, goalNode);
+function drawNewPath(originNode, goalNode) {
+    let d = new Dijkstra(graph, originNode);
+    let pathStack = d.pathTo(goalNode);
+    let path = formatPath(pathStack);
+    let dist = d.distTo(goalNode);
+    clearTable();
+    drawOriginNode(originNode);
+    drawGoalNode(goalNode);
+    drawPath(path);
 }
-function createPathOfLetters(path) {
-    let pathLetters = [letters[path[path.length - 1].from]];
+function clearTable() {
+    let nodes = document.querySelectorAll('div.node');
+    for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        for (let j = 0; j < nodeClasses.length; j++) {
+            const nodeClass = nodeClasses[j];
+            node.classList.remove(nodeClass);
+        }
+    }
+}
+function drawOriginNode(originNode) {
+    document.querySelector("[data-id='" + originNode + "']").classList.add("origin");
+}
+function drawGoalNode(goalNode) {
+    document.querySelector("[data-id='" + goalNode + "']").classList.add("goal");
+}
+function drawPath(path) {
+    for (let i = 0; i < path.length; i++) {
+        let node = document.querySelector("[data-id='" + path[i] + "']");
+        node.classList.add("path");
+    }
+}
+function formatPath(pathStack) {
+    let path = [pathStack[pathStack.length - 1].from];
     let ii = 1;
-    for (let i = path.length - 1; i >= 0; i--) {
-        pathLetters[ii] = letters[path[i].to];
+    for (let i = pathStack.length - 1; i >= 0; i--) {
+        path[ii] = pathStack[i].to;
         ii++;
     }
-    return pathLetters;
+    return path;
 }
 function setupGridDemo() {
     let tableWrapper = document.querySelector(".tableWrapper");
     let rows = 5;
     let cols = 5;
-    let table = document.createElement("TABLE");
+    let table = document.querySelector('.table');
     table.classList.add("table");
     table.style.gridTemplateRows = "repeat(" + rows + ",1fr)";
     table.style.gridTemplateColumns = "repeat(" + cols + ",1fr)";
@@ -43,10 +63,10 @@ function setupGridDemo() {
     tableWrapper.appendChild(table);
     for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
-            addEdgeToGraph(col, row);
+            addOutEdges(col, row);
         }
     }
-    function addEdgeToGraph(col, row) {
+    function addOutEdges(col, row) {
         const leftEdge = (col == 0);
         const rightEdge = (col == cols - 1);
         const topEdge = (row == 0);
@@ -64,7 +84,7 @@ function setupGridDemo() {
     function newNode(x, y) {
         let div = document.createElement("DIV");
         div.classList.add("node");
-        div.innerText = letters[coordToNodeID(x, y)];
+        div.innerText = coordToNodeID(x, y).toString();
         div.dataset.id = coordToNodeID(x, y).toString();
         div.dataset.x = x.toString();
         div.dataset.y = y.toString();
@@ -78,22 +98,4 @@ function setupGridDemo() {
 }
 function coordToNodeIDGeneral(x, y, cols) {
     return x + y * cols;
-}
-window.onresize = resizePage;
-let aHeight = 1;
-let aWidth = 1;
-let tableWrapper = document.querySelector('.tableWrapper');
-let table = document.querySelector('.table');
-function resizePage() {
-    const pageConainerIsWide = tableWrapper.offsetHeight / tableWrapper.offsetWidth < aHeight;
-    if (pageConainerIsWide) {
-        tableWrapper.style.flexDirection = "column";
-        table.style.width = tableWrapper.offsetHeight * aWidth + "px";
-        table.style.height = "auto";
-    }
-    else {
-        tableWrapper.style.flexDirection = "row";
-        table.style.height = tableWrapper.offsetWidth * aHeight + "px";
-        table.style.width = "auto";
-    }
 }
