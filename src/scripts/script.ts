@@ -56,11 +56,11 @@ function setupGridDemo() {
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      addEdgeToGraph(col, row);
+      addOutEdges(col, row);
     }
   }
 
-  function addEdgeToGraph(col: number, row: number) {
+  function addOutEdges(col: number, row: number) {
     const leftEdge = (col == 0);
     const rightEdge = (col == cols - 1);
     const topEdge = (row == 0);
