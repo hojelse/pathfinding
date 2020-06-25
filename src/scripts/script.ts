@@ -103,7 +103,35 @@ function setupGridDemo() {
     div.dataset.id = coordToNodeID(x,y).toString();
     div.dataset.x = x.toString();
     div.dataset.y = y.toString();
+    div.addEventListener("mousedown", handleMouseDown)
+    div.addEventListener("mouseup", handleMouseUp)
+    div.addEventListener("mouseenter", handleMouseEnter)
     return div;
+  }
+
+  let isMouseDown:boolean = false;
+  let currentMovingGoal:number|null = null;
+
+  function handleMouseDown(e:Event) {
+    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
+    currentMovingGoal = eval(node.dataset.id);
+    isMouseDown = true;
+
+    console.log("currentMovingGoal: " + currentMovingGoal);
+  }
+
+  function handleMouseUp(e:Event) {
+    isMouseDown = false;
+  }
+
+  function handleMouseEnter(e:Event) {
+    if (!isMouseDown) return;
+    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
+    if (node.classList.contains("goal") || node.classList.contains("origin")) return;
+
+    console.log("new goal: " + node.dataset.id);
+    goalNode = eval(node.dataset.id);
+    drawNewPath(originNode, goalNode);
   }
 
   function coordToNodeID(x:number, y:number):number {

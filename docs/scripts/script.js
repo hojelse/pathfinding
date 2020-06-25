@@ -88,7 +88,31 @@ function setupGridDemo() {
         div.dataset.id = coordToNodeID(x, y).toString();
         div.dataset.x = x.toString();
         div.dataset.y = y.toString();
+        div.addEventListener("mousedown", handleMouseDown);
+        div.addEventListener("mouseup", handleMouseUp);
+        div.addEventListener("mouseenter", handleMouseEnter);
         return div;
+    }
+    let isMouseDown = false;
+    let currentMovingGoal = null;
+    function handleMouseDown(e) {
+        let node = e.currentTarget;
+        currentMovingGoal = eval(node.dataset.id);
+        isMouseDown = true;
+        console.log("currentMovingGoal: " + currentMovingGoal);
+    }
+    function handleMouseUp(e) {
+        isMouseDown = false;
+    }
+    function handleMouseEnter(e) {
+        if (!isMouseDown)
+            return;
+        let node = e.currentTarget;
+        if (node.classList.contains("goal") || node.classList.contains("origin"))
+            return;
+        console.log("new goal: " + node.dataset.id);
+        goalNode = eval(node.dataset.id);
+        drawNewPath(originNode, goalNode);
     }
     function coordToNodeID(x, y) {
         return coordToNodeIDGeneral(x, y, cols);
@@ -113,4 +137,6 @@ class GridGraph extends Graph {
         let row = Math.floor(id / this.cols);
         return { col: col, row: row };
     }
+}
+class Board {
 }
