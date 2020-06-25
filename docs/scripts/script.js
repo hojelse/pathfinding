@@ -91,18 +91,42 @@ function setupGridDemo() {
         div.addEventListener("mousedown", handleMouseDown);
         div.addEventListener("mouseup", handleMouseUp);
         div.addEventListener("mouseenter", handleMouseEnter);
+        document.addEventListener("touchmove", handleTouchMove);
         return div;
     }
     let isMouseDown = false;
     let currentMovingGoal = null;
     function handleMouseDown(e) {
-        let node = e.currentTarget;
-        currentMovingGoal = eval(node.dataset.id);
         isMouseDown = true;
+        let node = e.currentTarget;
+        setCurrentMovingGoal(node);
+    }
+    function handleTouchStart(e) {
+        isMouseDown = true;
+        console.log(isMouseDown);
+        let node = e.currentTarget;
+        setCurrentMovingGoal(node);
+    }
+    function setCurrentMovingGoal(node) {
+        currentMovingGoal = eval(node.dataset.id);
         console.log("currentMovingGoal: " + currentMovingGoal);
     }
     function handleMouseUp(e) {
         isMouseDown = false;
+    }
+    function handleTouchMove(e) {
+        if (e.changedTouches == null || e.changedTouches.length == 0)
+            return;
+        let touch = e.changedTouches[0];
+        let node = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (node == null || node == undefined)
+            return;
+        if (!node.classList.contains("node"))
+            return;
+        if (node.classList.contains("goal") || node.classList.contains("origin"))
+            return;
+        goalNode = eval(node.dataset.id);
+        drawNewPath(originNode, goalNode);
     }
     function handleMouseEnter(e) {
         if (!isMouseDown)
@@ -110,7 +134,6 @@ function setupGridDemo() {
         let node = e.currentTarget;
         if (node.classList.contains("goal") || node.classList.contains("origin"))
             return;
-        console.log("new goal: " + node.dataset.id);
         goalNode = eval(node.dataset.id);
         drawNewPath(originNode, goalNode);
     }

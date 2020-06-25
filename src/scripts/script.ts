@@ -106,30 +106,51 @@ function setupGridDemo() {
     div.addEventListener("mousedown", handleMouseDown)
     div.addEventListener("mouseup", handleMouseUp)
     div.addEventListener("mouseenter", handleMouseEnter)
+    document.addEventListener("touchmove", handleTouchMove)
     return div;
   }
 
   let isMouseDown:boolean = false;
   let currentMovingGoal:number|null = null;
 
-  function handleMouseDown(e:Event) {
-    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
-    currentMovingGoal = eval(node.dataset.id);
+  function handleMouseDown(e:MouseEvent) {
     isMouseDown = true;
+    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
+    setCurrentMovingGoal(node);
+  }
 
+  function handleTouchStart(e:TouchEvent) {
+    isMouseDown = true;
+    console.log(isMouseDown);
+    
+    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
+    setCurrentMovingGoal(node);
+  }
+
+  function setCurrentMovingGoal(node: HTMLDivElement) {
+    currentMovingGoal = eval(node.dataset.id);
     console.log("currentMovingGoal: " + currentMovingGoal);
   }
 
-  function handleMouseUp(e:Event) {
+  function handleMouseUp(e:MouseEvent) {
     isMouseDown = false;
   }
 
-  function handleMouseEnter(e:Event) {
+  function handleTouchMove(e:TouchEvent) {
+    if (e.changedTouches == null || e.changedTouches.length == 0) return;
+    let touch:Touch = e.changedTouches[0];
+    let node:HTMLDivElement = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLDivElement;
+    if (node == null || node == undefined) return;
+    if (!node.classList.contains("node")) return;
+    if (node.classList.contains("goal") || node.classList.contains("origin")) return;
+    goalNode = eval(node.dataset.id);   
+    drawNewPath(originNode, goalNode);
+  }
+
+  function handleMouseEnter(e:MouseEvent) {
     if (!isMouseDown) return;
     let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
     if (node.classList.contains("goal") || node.classList.contains("origin")) return;
-
-    console.log("new goal: " + node.dataset.id);
     goalNode = eval(node.dataset.id);
     drawNewPath(originNode, goalNode);
   }
