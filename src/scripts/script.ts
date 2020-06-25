@@ -114,22 +114,10 @@ function setupGridDemo() {
   let currentMovingGoal:number|null = null;
 
   function handleMouseDown(e:MouseEvent) {
-    isMouseDown = true;
     let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
-    setCurrentMovingGoal(node);
-  }
-
-  function handleTouchStart(e:TouchEvent) {
+    if (!node.classList.contains("goal")) return isMouseDown = false;
     isMouseDown = true;
-    console.log(isMouseDown);
-    
-    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
-    setCurrentMovingGoal(node);
-  }
-
-  function setCurrentMovingGoal(node: HTMLDivElement) {
     currentMovingGoal = eval(node.dataset.id);
-    console.log("currentMovingGoal: " + currentMovingGoal);
   }
 
   function handleMouseUp(e:MouseEvent) {

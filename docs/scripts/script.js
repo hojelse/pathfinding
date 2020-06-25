@@ -97,19 +97,11 @@ function setupGridDemo() {
     let isMouseDown = false;
     let currentMovingGoal = null;
     function handleMouseDown(e) {
-        isMouseDown = true;
         let node = e.currentTarget;
-        setCurrentMovingGoal(node);
-    }
-    function handleTouchStart(e) {
+        if (!node.classList.contains("goal"))
+            return isMouseDown = false;
         isMouseDown = true;
-        console.log(isMouseDown);
-        let node = e.currentTarget;
-        setCurrentMovingGoal(node);
-    }
-    function setCurrentMovingGoal(node) {
         currentMovingGoal = eval(node.dataset.id);
-        console.log("currentMovingGoal: " + currentMovingGoal);
     }
     function handleMouseUp(e) {
         isMouseDown = false;
