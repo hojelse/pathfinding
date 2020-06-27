@@ -120,5 +120,9 @@ function coordToNodeIDGeneral(x:number, y:number, cols:number):number {
 }
 
 class Board {
-  
+  gridGraph:GridGraph;
+
+  constructor() {
+    this.gridGraph = new GridGraph(5,5);
+  }
 }
