@@ -13,6 +13,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return privateMap.get(receiver);
 };
 var _distTo, _edgeTo, _pq;
+// Pathfinding algorithm Dijkstra that runs on a Graph
 class Dijkstra {
     constructor(graph, startVertex) {
         _distTo.set(this, void 0);

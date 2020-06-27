@@ -1,3 +1,4 @@
+// Pathfinding algorithm Dijkstra that runs on a Graph
 class Dijkstra {
   #distTo:number[];
   #edgeTo:Edge[];

@@ -1,6 +1,7 @@
 "use strict";
+let board = new Board();
 const nodeClasses = ["origin", "goal", "wall", "path"];
-let graph = new Graph(25);
+let graph = new GridGraph(5, 5);
 setupGridDemo();
 let originNode = 0;
 let goalNode = 24;
@@ -61,26 +62,6 @@ function setupGridDemo() {
         }
     }
     tableWrapper.appendChild(table);
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            addOutEdges(col, row);
-        }
-    }
-    function addOutEdges(col, row) {
-        const leftEdge = (col == 0);
-        const rightEdge = (col == cols - 1);
-        const topEdge = (row == 0);
-        const bottomEdge = (row == rows - 1);
-        let currentNodeID = coordToNodeID(col, row);
-        if (!topEdge)
-            graph.addEdge(currentNodeID, coordToNodeID(col, row - 1));
-        if (!rightEdge)
-            graph.addEdge(currentNodeID, coordToNodeID(col + 1, row));
-        if (!bottomEdge)
-            graph.addEdge(currentNodeID, coordToNodeID(col, row + 1));
-        if (!leftEdge)
-            graph.addEdge(currentNodeID, coordToNodeID(col - 1, row));
-    }
     function newNode(x, y) {
         let div = document.createElement("DIV");
         div.classList.add("node");
@@ -130,18 +111,6 @@ function setupGridDemo() {
         drawNewPath(originNode, goalNode);
     }
     function coordToNodeID(x, y) {
-        return coordToNodeIDGeneral(x, y, cols);
+        return x + y * cols;
     }
-    function setAsOrigin(x, y) {
-    }
-}
-function coordToNodeIDGeneral(x, y, cols) {
-    return x + y * cols;
-}
-class Board {
-    constructor() {
-        this.gridGraph = new GridGraph(5, 5);
-    }
-}
-class Board {
 }
