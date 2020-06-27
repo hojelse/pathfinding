@@ -4,10 +4,10 @@ class GridGraph extends Graph {
   rows:number;
   cols:number;
 
-  constructor(rows:number, columns:number) {
-    super(rows*columns);
-    this.rows = rows;
-    this.cols = columns;
+  constructor(state:string[][]) {
+    super(state.length*state[0].length);
+    this.rows = state.length;
+    this.cols = state[0].length;
     this.setup();
   }
 

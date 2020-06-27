@@ -11,7 +11,7 @@ form.addEventListener('submit', e => {
 function handleSubmit(){
   const newOrigin = eval(originInput.value);
   const newGoal = eval(goalInput.value);
-  drawNewPath(newOrigin, newGoal);
+  board.drawNewPath();
 }
 
 window.onresize = resizeTable;

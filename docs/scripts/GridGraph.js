@@ -2,10 +2,10 @@
 // Subclass of Graph
 // where every node has a maximum of 4 outgoing and 4 ingoing edges
 class GridGraph extends Graph {
-    constructor(rows, columns) {
-        super(rows * columns);
-        this.rows = rows;
-        this.cols = columns;
+    constructor(state) {
+        super(state.length * state[0].length);
+        this.rows = state.length;
+        this.cols = state[0].length;
         this.setup();
     }
     setup() {
