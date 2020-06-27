@@ -88,7 +88,46 @@ function setupGridDemo() {
         div.dataset.id = coordToNodeID(x, y).toString();
         div.dataset.x = x.toString();
         div.dataset.y = y.toString();
+        div.addEventListener("mousedown", handleMouseDown);
+        div.addEventListener("mouseup", handleMouseUp);
+        div.addEventListener("mouseenter", handleMouseEnter);
+        document.addEventListener("touchmove", handleTouchMove);
         return div;
+    }
+    let isMouseDown = false;
+    let currentMovingGoal = null;
+    function handleMouseDown(e) {
+        let node = e.currentTarget;
+        if (!node.classList.contains("goal"))
+            return isMouseDown = false;
+        isMouseDown = true;
+        currentMovingGoal = eval(node.dataset.id);
+    }
+    function handleMouseUp(e) {
+        isMouseDown = false;
+    }
+    function handleTouchMove(e) {
+        if (e.changedTouches == null || e.changedTouches.length == 0)
+            return;
+        let touch = e.changedTouches[0];
+        let node = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (node == null || node == undefined)
+            return;
+        if (!node.classList.contains("node"))
+            return;
+        if (node.classList.contains("goal") || node.classList.contains("origin"))
+            return;
+        goalNode = eval(node.dataset.id);
+        drawNewPath(originNode, goalNode);
+    }
+    function handleMouseEnter(e) {
+        if (!isMouseDown)
+            return;
+        let node = e.currentTarget;
+        if (node.classList.contains("goal") || node.classList.contains("origin"))
+            return;
+        goalNode = eval(node.dataset.id);
+        drawNewPath(originNode, goalNode);
     }
     function coordToNodeID(x, y) {
         return coordToNodeIDGeneral(x, y, cols);
@@ -103,4 +142,6 @@ class Board {
     constructor() {
         this.gridGraph = new GridGraph(5, 5);
     }
+}
+class Board {
 }

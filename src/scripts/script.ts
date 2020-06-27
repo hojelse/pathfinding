@@ -103,7 +103,44 @@ function setupGridDemo() {
     div.dataset.id = coordToNodeID(x,y).toString();
     div.dataset.x = x.toString();
     div.dataset.y = y.toString();
+    div.addEventListener("mousedown", handleMouseDown)
+    div.addEventListener("mouseup", handleMouseUp)
+    div.addEventListener("mouseenter", handleMouseEnter)
+    document.addEventListener("touchmove", handleTouchMove)
     return div;
+  }
+
+  let isMouseDown:boolean = false;
+  let currentMovingGoal:number|null = null;
+
+  function handleMouseDown(e:MouseEvent) {
+    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
+    if (!node.classList.contains("goal")) return isMouseDown = false;
+    isMouseDown = true;
+    currentMovingGoal = eval(node.dataset.id);
+  }
+
+  function handleMouseUp(e:MouseEvent) {
+    isMouseDown = false;
+  }
+
+  function handleTouchMove(e:TouchEvent) {
+    if (e.changedTouches == null || e.changedTouches.length == 0) return;
+    let touch:Touch = e.changedTouches[0];
+    let node:HTMLDivElement = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLDivElement;
+    if (node == null || node == undefined) return;
+    if (!node.classList.contains("node")) return;
+    if (node.classList.contains("goal") || node.classList.contains("origin")) return;
+    goalNode = eval(node.dataset.id);   
+    drawNewPath(originNode, goalNode);
+  }
+
+  function handleMouseEnter(e:MouseEvent) {
+    if (!isMouseDown) return;
+    let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
+    if (node.classList.contains("goal") || node.classList.contains("origin")) return;
+    goalNode = eval(node.dataset.id);
+    drawNewPath(originNode, goalNode);
   }
 
   function coordToNodeID(x:number, y:number):number {
