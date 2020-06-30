@@ -69,11 +69,11 @@ class Board extends HTMLDivElement {
   }
 
   setupGridDemo() {
-    let rows = 5;
-    let cols = 5;
+    let rows = this.state.length;
+    let cols = this.state[0].length;
   
-    let table:HTMLDivElement = document.querySelector('.table');
-    this.classList.add("table");
+    let table:HTMLDivElement = document.querySelector('table-board');
+    // this.classList.add("table");
     table.style.gridTemplateRows = "repeat("+rows+",1fr)";
     table.style.gridTemplateColumns = "repeat("+cols+",1fr)";
   

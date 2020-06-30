@@ -57,10 +57,10 @@ class Board extends HTMLDivElement {
         }
     }
     setupGridDemo() {
-        let rows = 5;
-        let cols = 5;
-        let table = document.querySelector('.table');
-        this.classList.add("table");
+        let rows = this.state.length;
+        let cols = this.state[0].length;
+        let table = document.querySelector('table-board');
+        // this.classList.add("table");
         table.style.gridTemplateRows = "repeat(" + rows + ",1fr)";
         table.style.gridTemplateColumns = "repeat(" + cols + ",1fr)";
         for (let row = 0; row < rows; row++) {
