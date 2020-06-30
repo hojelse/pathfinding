@@ -5,6 +5,7 @@ class Board extends HTMLDivElement {
   state:string[][];
   originNode = 0;
   goalNode = 24;
+  algorithm:Dijkstra;
 
   constructor() {
     super();
@@ -20,11 +21,14 @@ class Board extends HTMLDivElement {
   }
 
   drawNewPath() {
-    let d = new Dijkstra(gridGraph, this.originNode);
-  
-    let pathStack = d.pathTo(this.goalNode);
+    this.algorithm = new Dijkstra(gridGraph, this.originNode);
+    let dijkstra = this.algorithm;
+
+    let pathStack = dijkstra.getPathTo(this.goalNode);
     let path = this.formatPath(pathStack);
-    let dist = d.distTo(this.goalNode);
+    let dist = dijkstra.getDistTo(this.goalNode);
+
+    console.log(dijkstra);
   
     this.clearTable();
     this.drawOriginNode(this.originNode);
