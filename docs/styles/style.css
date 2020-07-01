@@ -84,6 +84,34 @@ table-board {
   width: 100%;
   height: 100%;
   padding: 5px;
+  --margin: 5px;
+}
+
+table-board .node::before,
+table-board .node::after {
+  transition: opacity 0.4s ease-in-out;
+}
+
+table-board .node {
+  transition: border-radius 0.4s ease-in-out, margin 0.4s ease-in-out;
+}
+
+table-board .node::before,
+table-board .node::after {
+  opacity: 0;
+}
+
+table-board.showMST {
+  --margin: 15px;
+}
+
+table-board.showMST .node {
+  border-radius: 50%;
+}
+
+table-board.showMST .node::before,
+table-board.showMST .node::after {
+  opacity: 1;
 }
 
 .node {
@@ -95,7 +123,7 @@ table-board {
   background-color: #444;
   color: #fff;
   user-select: none;
-  margin: 5px;
+  margin: var(--margin);
 }
 
 .node.wall {
@@ -106,27 +134,105 @@ table-board {
   background-color: blueviolet;
 }
 
-.node.origin::after {
-  content: '';
-  position: absolute;
-  display: block;
-  height: 50%;
-  width: 50%;
-  border-radius: 50%;
+.node.origin {
   background-color: lightblue;
 }
 
-.node.goal::after {
-  content: '';
-  position: absolute;
-  display: block;
-  height: 50%;
-  width: 50%;
-  border-radius: 50%;
+.node.goal {
   background-color: violet;
 }
 
-.node {
-  border: 5px solid #00000000;
+.up::after,
+.right::before,
+.down::after,
+.left::before {
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: inherit;
+}
+
+.up::after {
+  bottom: 100%;
+  height: calc(var(--margin) * 2);
+  width: 10px;
+}
+
+.right::before {
+  left: 100%;
+  width: calc(var(--margin) * 2);
+  height: 10px;
+}
+
+.down::after {
+  top: 100%;
+  height: calc(var(--margin) * 2);
+  width: 10px;
+}
+
+.left::before {
+  right: 100%;
+  width: calc(var(--margin) * 2);
+  height: 10px;
+}
+
+label {
+  color: #fff;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 /*# sourceMappingURL=style.css.map */

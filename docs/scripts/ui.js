@@ -1,16 +1,18 @@
 "use strict";
-let form = document.querySelector('form');
-let originInput = document.querySelector('#origin');
-let goalInput = document.querySelector('#goal');
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    handleSubmit();
-}, false);
-function handleSubmit() {
-    board.originNode = eval(originInput.value);
-    board.goalNode = eval(goalInput.value);
-    board.drawNewPath();
-}
+// let form:HTMLFormElement = document.querySelector('form');
+// let originInput:HTMLInputElement = document.querySelector('#origin');
+// let goalInput:HTMLInputElement = document.querySelector('#goal');
+let toggleMST = document.querySelector('#toggleMST');
+let tableBoard = document.querySelector('table-board');
+// form.addEventListener('submit', e => {
+//   e.preventDefault();
+//   handleSubmit();
+// }, false);
+// function handleSubmit(){
+//   board.originNode = eval(originInput.value);
+//   board.goalNode = eval(goalInput.value);
+//   board.drawNewPath();
+// }
 window.onresize = resizeTable;
 let aHeight = 1;
 let aWidth = 1;
@@ -29,3 +31,11 @@ function resizeTable() {
         table.style.width = "auto";
     }
 }
+toggleMST.addEventListener('click', e => {
+    if (toggleMST.checked) {
+        tableBoard.classList.add("showMST");
+    }
+    else {
+        tableBoard.classList.remove("showMST");
+    }
+}, false);

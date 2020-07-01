@@ -28,12 +28,46 @@ class Board extends HTMLDivElement {
     let path = this.formatPath(pathStack);
     let dist = dijkstra.getDistTo(this.goalNode);
 
-    console.log(dijkstra);
-  
     this.clearTable();
     this.drawOriginNode(this.originNode);
     this.drawGoalNode(this.goalNode);
     this.drawPath(path);
+    this.drawEdgeToTree();
+  }
+
+  drawEdgeToTree() {
+    // console.log(this.algorithm.edgeTo);
+    let edgeTo = this.algorithm.edgeTo;
+    edgeTo.forEach(edge => {
+      // console.log(edge.from + " -> " + edge.to);
+
+      let fromCoord = this.gridGraph.idToCoords(edge.from);
+
+      let up = this.gridGraph.coordsToId(fromCoord.col, fromCoord.row-1);
+      let right = this.gridGraph.coordsToId(fromCoord.col+1, fromCoord.row);
+      let down = this.gridGraph.coordsToId(fromCoord.col, fromCoord.row+1);
+      let left = this.gridGraph.coordsToId(fromCoord.col-1, fromCoord.row);
+
+      let fromNode:HTMLDivElement = document.querySelector("[data-id='" + edge.from + "']");
+      switch (edge.to) {
+        case up:
+          fromNode.classList.add("up");
+          break;
+        case right:
+          fromNode.classList.add("right");
+          break;
+        case down:
+          fromNode.classList.add("down");
+          break;
+        case left:
+          fromNode.classList.add("left");
+          break;
+        default:
+          break;
+      }
+
+
+    });
   }
 
   formatPath(pathStack:Edge[]) {
