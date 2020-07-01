@@ -103,7 +103,7 @@ class Board extends HTMLDivElement {
         function newNode(x, y) {
             let div = document.createElement("DIV");
             div.classList.add("node");
-            div.innerText = coordToNodeID(x, y).toString();
+            div.innerText = letters[coordToNodeID(x, y)].toString();
             div.dataset.id = coordToNodeID(x, y).toString();
             div.dataset.x = x.toString();
             div.dataset.y = y.toString();
@@ -154,3 +154,4 @@ class Board extends HTMLDivElement {
     }
 }
 customElements.define('table-board', Board, { extends: 'div' });
+let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
