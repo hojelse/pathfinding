@@ -28,10 +28,15 @@ class Board extends HTMLDivElement {
         this.drawEdgeToTree();
     }
     drawEdgeToTree() {
-        // console.log(this.algorithm.edgeTo);
+        document.querySelectorAll(".node").forEach(node => {
+            node.classList.remove("up");
+            node.classList.remove("right");
+            node.classList.remove("down");
+            node.classList.remove("left");
+        });
         let edgeTo = this.algorithm.edgeTo;
+        console.log(edgeTo);
         edgeTo.forEach(edge => {
-            // console.log(edge.from + " -> " + edge.to);
             let fromCoord = this.gridGraph.idToCoords(edge.from);
             let up = this.gridGraph.coordsToId(fromCoord.col, fromCoord.row - 1);
             let right = this.gridGraph.coordsToId(fromCoord.col + 1, fromCoord.row);

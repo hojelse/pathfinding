@@ -36,10 +36,17 @@ class Board extends HTMLDivElement {
   }
 
   drawEdgeToTree() {
-    // console.log(this.algorithm.edgeTo);
+    document.querySelectorAll(".node").forEach(node => {
+      node.classList.remove("up");
+      node.classList.remove("right");
+      node.classList.remove("down");
+      node.classList.remove("left");
+    });
+
     let edgeTo = this.algorithm.edgeTo;
+    console.log(edgeTo);
+    
     edgeTo.forEach(edge => {
-      // console.log(edge.from + " -> " + edge.to);
 
       let fromCoord = this.gridGraph.idToCoords(edge.from);
 
@@ -49,6 +56,7 @@ class Board extends HTMLDivElement {
       let left = this.gridGraph.coordsToId(fromCoord.col-1, fromCoord.row);
 
       let fromNode:HTMLDivElement = document.querySelector("[data-id='" + edge.from + "']");
+
       switch (edge.to) {
         case up:
           fromNode.classList.add("up");
