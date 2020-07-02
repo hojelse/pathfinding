@@ -4,7 +4,7 @@
 class Board extends HTMLDivElement {
     constructor() {
         super();
-        this.originNode = 0;
+        this.originNode = 1;
         this.goalNode = 24;
         this.state = [
             ['node', 'node', 'node', 'node', 'node'],

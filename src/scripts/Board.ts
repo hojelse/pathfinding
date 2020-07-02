@@ -3,7 +3,7 @@
 class Board extends HTMLDivElement {
   gridGraph:GridGraph;
   state:string[][];
-  originNode = 0;
+  originNode = 1;
   goalNode = 24;
   algorithm:Dijkstra;
 
