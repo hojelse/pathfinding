@@ -115,6 +115,8 @@ class Board extends HTMLDivElement {
             div.addEventListener("mouseup", handleMouseUp);
             div.addEventListener("mouseenter", handleMouseEnter);
             document.addEventListener("touchmove", handleTouchMove);
+            document.addEventListener("touchstart", handleTouchStart);
+            document.addEventListener("touchend", handleTouchEnd);
             return div;
         }
         let isMouseDown = false;
@@ -158,18 +160,52 @@ class Board extends HTMLDivElement {
             }
         }
         function handleTouchMove(e) {
-            if (e.changedTouches == null || e.changedTouches.length == 0)
+            if (!isMouseDown)
+                return;
+            if (e.changedTouches == null || e.changedTouches == undefined)
                 return;
             let touch = e.changedTouches[0];
             let node = document.elementFromPoint(touch.clientX, touch.clientY);
             if (node == null || node == undefined)
                 return;
-            if (!node.classList.contains("node"))
-                return;
             if (node.classList.contains("goal") || node.classList.contains("origin"))
                 return;
-            board.goalNode = eval(node.dataset.id);
-            board.drawNewPath();
+            if (node.dataset == undefined)
+                return;
+            if (node.dataset.id == undefined)
+                return;
+            if (currentMovingGoal != null) {
+                board.goalNode = eval(node.dataset.id);
+                board.drawNewPath();
+            }
+            if (currentMovingOrigin != null) {
+                board.originNode = eval(node.dataset.id);
+                board.gridGraph = new GridGraph(board.state);
+                board.drawNewPath();
+            }
+        }
+        function handleTouchEnd(e) {
+            currentMovingGoal = null;
+            currentMovingOrigin = null;
+            isMouseDown = false;
+        }
+        function handleTouchStart(e) {
+            let touch = e.changedTouches[0];
+            let node = document.elementFromPoint(touch.clientX, touch.clientY);
+            console.log(node);
+            currentMovingGoal = null;
+            currentMovingOrigin = null;
+            if (node.classList.contains("goal")) {
+                isMouseDown = true;
+                currentMovingGoal = eval(node.dataset.id);
+            }
+            else if (node.classList.contains("origin")) {
+                isMouseDown = true;
+                currentMovingOrigin = eval(node.dataset.id);
+            }
+            else {
+                isMouseDown = false;
+            }
         }
         function coordToNodeID(x, y) {
             return x + y * cols;
