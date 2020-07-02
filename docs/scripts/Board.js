@@ -192,7 +192,6 @@ class Board extends HTMLDivElement {
         function handleTouchStart(e) {
             let touch = e.changedTouches[0];
             let node = document.elementFromPoint(touch.clientX, touch.clientY);
-            console.log(node);
             currentMovingGoal = null;
             currentMovingOrigin = null;
             if (node.classList.contains("goal")) {
