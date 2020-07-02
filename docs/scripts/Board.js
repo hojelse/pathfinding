@@ -16,7 +16,7 @@ class Board extends HTMLDivElement {
         this.gridGraph = new GridGraph(this.state);
     }
     drawNewPath() {
-        this.algorithm = new Dijkstra(gridGraph, this.originNode);
+        this.algorithm = new Dijkstra(this.gridGraph, this.originNode);
         let dijkstra = this.algorithm;
         let pathStack = dijkstra.getPathTo(this.goalNode);
         let path = this.formatPath(pathStack);
@@ -119,15 +119,43 @@ class Board extends HTMLDivElement {
         }
         let isMouseDown = false;
         let currentMovingGoal = null;
+        let currentMovingOrigin = null;
         function handleMouseDown(e) {
             let node = e.currentTarget;
-            if (!node.classList.contains("goal"))
-                return isMouseDown = false;
-            isMouseDown = true;
-            currentMovingGoal = eval(node.dataset.id);
+            currentMovingGoal = null;
+            currentMovingOrigin = null;
+            if (node.classList.contains("goal")) {
+                isMouseDown = true;
+                currentMovingGoal = eval(node.dataset.id);
+            }
+            else if (node.classList.contains("origin")) {
+                isMouseDown = true;
+                currentMovingOrigin = eval(node.dataset.id);
+            }
+            else {
+                isMouseDown = false;
+            }
         }
         function handleMouseUp(e) {
+            currentMovingGoal = null;
+            currentMovingOrigin = null;
             isMouseDown = false;
+        }
+        function handleMouseEnter(e) {
+            if (!isMouseDown)
+                return;
+            let node = e.currentTarget;
+            if (node.classList.contains("goal") || node.classList.contains("origin"))
+                return;
+            if (currentMovingGoal != null) {
+                board.goalNode = eval(node.dataset.id);
+                board.drawNewPath();
+            }
+            if (currentMovingOrigin != null) {
+                board.originNode = eval(node.dataset.id);
+                board.gridGraph = new GridGraph(board.state);
+                board.drawNewPath();
+            }
         }
         function handleTouchMove(e) {
             if (e.changedTouches == null || e.changedTouches.length == 0)
@@ -138,15 +166,6 @@ class Board extends HTMLDivElement {
                 return;
             if (!node.classList.contains("node"))
                 return;
-            if (node.classList.contains("goal") || node.classList.contains("origin"))
-                return;
-            board.goalNode = eval(node.dataset.id);
-            board.drawNewPath();
-        }
-        function handleMouseEnter(e) {
-            if (!isMouseDown)
-                return;
-            let node = e.currentTarget;
             if (node.classList.contains("goal") || node.classList.contains("origin"))
                 return;
             board.goalNode = eval(node.dataset.id);

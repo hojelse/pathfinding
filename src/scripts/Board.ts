@@ -21,7 +21,7 @@ class Board extends HTMLDivElement {
   }
 
   drawNewPath() {
-    this.algorithm = new Dijkstra(gridGraph, this.originNode);
+    this.algorithm = new Dijkstra(this.gridGraph, this.originNode);
     let dijkstra = this.algorithm;
 
     let pathStack = dijkstra.getPathTo(this.goalNode);
@@ -145,18 +145,46 @@ class Board extends HTMLDivElement {
   
     let isMouseDown:boolean = false;
     let currentMovingGoal:number|null = null;
+    let currentMovingOrigin:number|null = null;
   
     function handleMouseDown(e:MouseEvent) {
       let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
-      if (!node.classList.contains("goal")) return isMouseDown = false;
-      isMouseDown = true;
-      currentMovingGoal = eval(node.dataset.id);
+
+      currentMovingGoal = null;
+      currentMovingOrigin = null;
+
+      if (node.classList.contains("goal")){
+        isMouseDown = true;
+        currentMovingGoal = eval(node.dataset.id);
+      } else if(node.classList.contains("origin")) {
+        isMouseDown = true;
+        currentMovingOrigin = eval(node.dataset.id);
+      } else {
+        isMouseDown = false;
+      }
     }
   
     function handleMouseUp(e:MouseEvent) {
+      currentMovingGoal = null;
+      currentMovingOrigin = null;
       isMouseDown = false;
     }
   
+    function handleMouseEnter(e:MouseEvent) {
+      if (!isMouseDown) return;
+      let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
+      if (node.classList.contains("goal") || node.classList.contains("origin")) return;
+      if (currentMovingGoal != null) {
+        board.goalNode = eval(node.dataset.id);
+        board.drawNewPath();
+      }
+      if (currentMovingOrigin != null) {
+        board.originNode = eval(node.dataset.id);
+        board.gridGraph = new GridGraph(board.state);
+        board.drawNewPath();
+      }
+    }
+
     function handleTouchMove(e:TouchEvent) {
       if (e.changedTouches == null || e.changedTouches.length == 0) return;
       let touch:Touch = e.changedTouches[0];
@@ -165,14 +193,6 @@ class Board extends HTMLDivElement {
       if (!node.classList.contains("node")) return;
       if (node.classList.contains("goal") || node.classList.contains("origin")) return;
       board.goalNode = eval(node.dataset.id);   
-      board.drawNewPath();
-    }
-  
-    function handleMouseEnter(e:MouseEvent) {
-      if (!isMouseDown) return;
-      let node:HTMLDivElement = e.currentTarget as HTMLDivElement;
-      if (node.classList.contains("goal") || node.classList.contains("origin")) return;
-      board.goalNode = eval(node.dataset.id);
       board.drawNewPath();
     }
   
