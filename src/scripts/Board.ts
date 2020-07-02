@@ -211,6 +211,7 @@ class Board extends HTMLDivElement {
       currentMovingGoal = null;
       currentMovingOrigin = null;
       isMouseDown = false;
+      document.querySelector("body").style.backgroundColor = "red"
     }
 
     function handleTouchStart(e:TouchEvent) {
