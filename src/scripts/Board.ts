@@ -1,14 +1,16 @@
 // Custom DOM element
 // Keeping track of user input and the board state
 class Board extends HTMLDivElement {
-  gridGraph:GridGraph;
-  state:string[][];
-  originNode = 0;
-  goalNode = 24;
-  algorithm:Dijkstra;
+  gridGraph:GridGraph
+  state:string[][]
+  originNode:number
+  goalNode:number
+  algorithm:Dijkstra
 
   constructor() {
     super();
+    this.originNode = 0;
+    this.goalNode = 24;
     this.state = [
       ['node', 'node', 'node', 'node', 'node'],
       ['node', 'node', 'node', 'node', 'node'],
@@ -16,7 +18,6 @@ class Board extends HTMLDivElement {
       ['node', 'node', 'node', 'node', 'node'],
       ['node', 'node', 'node', 'node', 'node']
     ]
-    
     this.gridGraph = new GridGraph(this.state);
   }
 
@@ -132,7 +133,7 @@ class Board extends HTMLDivElement {
     function newNode(x:number,y:number) {
       let div = document.createElement("DIV");
       div.classList.add("node");
-      div.innerText = coordToNodeID(x,y).toString();
+      div.innerText = letters[coordToNodeID(x,y)].toString();
       div.dataset.id = coordToNodeID(x,y).toString();
       div.dataset.x = x.toString();
       div.dataset.y = y.toString();
@@ -240,4 +241,4 @@ class Board extends HTMLDivElement {
 }
 
 customElements.define('table-board', Board, { extends: 'div' });
-// let letters:string[] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+let letters:string[] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];

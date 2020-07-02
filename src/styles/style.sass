@@ -1,5 +1,6 @@
-$background: #333
+$background: #2a2a2a
 $highlight: #fff
+$highlight2: #888
 
 $origin: lightblue
 $goal: violet
@@ -36,22 +37,24 @@ body
   &>*
     margin: 0 5px
 
-input
-  height: 50px
+input[type=submit]
+  height: 34px
   background: none
-  border: 1px solid $highlight
+  border: 1px solid $highlight2
+  border-radius: 100px
   text-align: center
   color: $highlight
+  padding: 0 15px
 
 input[type=text]
-  height: 50px
-  width: 50px
+  height: 34px
+  width: 34px
   background: none
-  border: 1px solid $highlight
+  border: none
   border-radius: 50%
   text-align: center
   color: $highlight
-  font-size: 2em
+  font-size: 1.5em
 
 input.origin[type=text]
   background-color: $origin
@@ -64,13 +67,13 @@ input[type=text]:focus
   outline-width: 0
 
 svg
-  fill: $highlight
+  fill: $highlight2
   height: 50px
   width: 50px
   transform: scale(0.6)
   
 .boardWrapper
-  flex-grow: 1
+  z-index: 1
   flex-direction: column
   display: flex
   justify-content: center
@@ -79,18 +82,22 @@ svg
   height: 100%
 
 table-board
+  z-index: 1
   flex-grow: 1
   box-sizing: border-box
   display: grid
+  background-color: darken($background, 1%)
   box-shadow: 0 10px 20px -7px #00000044
-  width: 100%
   height: 100%
+  width: 100%
+  max-height: 500px
+  max-width: 500px
   padding: 5px
   --margin: 5px
+  transition: border-radius 0.4s ease-in-out
 
 table-board .node::before,
 table-board .node::after
-  // transition: 0.4s ease-in-out
   transition: opacity 0.4s ease-in-out, top 0.4s ease-in-out, right 0.4s ease-in-out, bottom 0.4s ease-in-out, left 0.4s ease-in-out
 
 table-board .node
@@ -102,6 +109,7 @@ table-board .node::after
 
 table-board.showMST
   --margin: 15px
+  border-radius: 20px
 
 table-board.showMST .node
   border-radius: 50%
@@ -116,7 +124,8 @@ table-board.showMST .node::after
   display: flex
   justify-content: center
   align-items: center
-  background-color: #444
+  --bgcolor: #333
+  background-color: var(--bgcolor)
   color: $highlight
   user-select: none
   margin: var(--margin)  
@@ -133,14 +142,12 @@ table-board.showMST .node::after
 .node.goal
   background-color: $goal
 
-.up::after,
-.right::before,
-.down::after,
-.left::before
+.node::before,
+.node::after
   content: ''
   display: block
   position: absolute
-  background-color: #444
+  background-color: var(--bgcolor)
   z-index: -1
 
 .right::before,

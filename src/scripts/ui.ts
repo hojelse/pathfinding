@@ -12,8 +12,8 @@ form.addEventListener('submit', e => {
 }, false);
 
 function handleSubmit(){
-  board.originNode = eval(originInput.value);
-  board.goalNode = eval(goalInput.value);
+  board.originNode = letters.indexOf(originInput.value);
+  board.goalNode = letters.indexOf(goalInput.value);
   board.drawNewPath();
 }
 

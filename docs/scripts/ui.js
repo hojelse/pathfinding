@@ -9,8 +9,8 @@ form.addEventListener('submit', e => {
     handleSubmit();
 }, false);
 function handleSubmit() {
-    board.originNode = eval(originInput.value);
-    board.goalNode = eval(goalInput.value);
+    board.originNode = letters.indexOf(originInput.value);
+    board.goalNode = letters.indexOf(goalInput.value);
     board.drawNewPath();
 }
 window.onresize = resizeTable;
