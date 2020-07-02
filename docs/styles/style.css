@@ -12,15 +12,14 @@ body {
   align-items: center;
   flex-direction: column;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 100px;
+  grid-template-rows: 1fr auto;
 }
 
 .inputWrapper {
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin: auto;
 }
 
 .inputWrapper > * {
