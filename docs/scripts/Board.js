@@ -4,7 +4,7 @@
 class Board extends HTMLDivElement {
     constructor() {
         super();
-        this.originNode = 1;
+        this.originNode = 0;
         this.goalNode = 24;
         this.state = [
             ['node', 'node', 'node', 'node', 'node'],
@@ -188,7 +188,6 @@ class Board extends HTMLDivElement {
             currentMovingGoal = null;
             currentMovingOrigin = null;
             isMouseDown = false;
-            document.querySelector("body").style.backgroundColor = "red";
         }
         function handleTouchStart(e) {
             let touch = e.changedTouches[0];

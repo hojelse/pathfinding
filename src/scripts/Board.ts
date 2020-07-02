@@ -3,7 +3,7 @@
 class Board extends HTMLDivElement {
   gridGraph:GridGraph;
   state:string[][];
-  originNode = 1;
+  originNode = 0;
   goalNode = 24;
   algorithm:Dijkstra;
 
@@ -211,7 +211,6 @@ class Board extends HTMLDivElement {
       currentMovingGoal = null;
       currentMovingOrigin = null;
       isMouseDown = false;
-      document.querySelector("body").style.backgroundColor = "red"
     }
 
     function handleTouchStart(e:TouchEvent) {
