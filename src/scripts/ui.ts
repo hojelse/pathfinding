@@ -3,6 +3,7 @@ let form:HTMLFormElement = document.querySelector('form');
 let originInput:HTMLInputElement = document.querySelector('#origin');
 let goalInput:HTMLInputElement = document.querySelector('#goal');
 let toggleMST:HTMLInputElement = document.querySelector('#toggleMST');
+let toggleGraph:HTMLInputElement = document.querySelector('#toggleGraph');
 
 let tableBoard:HTMLDivElement = document.querySelector('table-board');
 
@@ -41,6 +42,14 @@ toggleMST.addEventListener('click', e => {
     tableBoard.classList.add("showMST");
   } else {
     tableBoard.classList.remove("showMST");
+  }
+}, false);
+
+toggleGraph.addEventListener('click', e => {
+  if(toggleGraph.checked){
+    tableBoard.classList.add("showGraph");
+  } else {
+    tableBoard.classList.remove("showGraph");
   }
 }, false);
 

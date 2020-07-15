@@ -26,6 +26,15 @@ class Board extends HTMLDivElement {
         this.drawGoalNode(this.goalNode);
         this.drawPath(path);
         this.drawEdgeToTree();
+        this.drawAdjacencyList();
+    }
+    drawAdjacencyList() {
+        let adjacencyList = this.gridGraph.adjacencyList;
+        adjacencyList.forEach(currentNeighborhood => {
+            let fromCoord = this.gridGraph.idToCoords(currentNeighborhood.head.data.from);
+            console.log(fromCoord);
+            //TODO complete this
+        });
     }
     drawEdgeToTree() {
         document.querySelectorAll(".node").forEach(node => {
