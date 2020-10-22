@@ -1,6 +1,4 @@
-```
-this project is in progress
-```
+A reworked version of this project can be found at [/pathfinding-visualizer](https://github.com/hojelse/pathfinding-visualizer)
 
 # Pathfinding visualization
 
